@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>横滑组图工作室 · 池外 ChiWai</title>
+<meta name="author" content="池外 ChiWai" />
+<meta name="application-version" content="v1.0.0" />
+<meta name="description" content="免费离线横滑组图制作器，支持本地预览、公众号粘贴兼容测试与 Obsidian HTML 片段复制。" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header class="top"><div class="top-inner"><div class="brand"><span class="mark"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3.5" y="6" width="11" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="9.5" y="3.5" width="11" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m12 10 2.2 2.2L17 9.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span> 横滑组图 <span class="brand-secondary">/ Gallery Studio</span></div><div class="header-meta"><span class="version-label" aria-label="当前版本">v1.0.0</span></div></div></header>
+<main>
+  <section class="hero"><div><div class="eyebrow">GALLERY STUDIO / HORIZONTAL SLIDES · BY CHIWAI</div><h1>让图片，轻松左右翻阅。</h1><p>导入图片、调整顺序、选择样式，然后复制到你常用的平台。</p></div><div class="hero-creator" aria-label="创作者：池外 ChiWai"><span class="hero-creator-mark" aria-hidden="true">池</span><span class="hero-creator-caption"><span class="hero-creator-kicker">CREATED BY</span><strong>池外 <span>ChiWai</span></strong></span></div></section>
+  <section class="workspace">
+    <section class="panel upload-panel">
+      <div class="panel-h"><div><span class="panel-kicker">STEP 01</span><h2>添加与排序 <span id="imageCount" class="count-chip">3 张</span></h2></div><button class="btn-text" id="resetBtn">清空</button></div>
+      <div class="content">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="添加图片"><div class="ico"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L8 8m4-4 4 4M5 16v3a2 2 0 002 2h10a2 2 0 002-2v-3"/></svg></div><b>拖入图片，或点击添加</b><p>JPG / PNG / WebP / GIF · 最多 30 张</p><button class="smallbtn" id="chooseBtn" type="button">+ 添加图片</button><input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden></div>
+        <div class="list-heading"><span>图片顺序</span><span>按住 <b>六点手柄</b> 拖动调整</span></div><div class="photo-list" id="photoList" aria-label="图片顺序列表"></div><p class="tip dragtip">拖动调整顺序，点击图片可在中间查看。也支持上下移动。</p>
+        <button class="btn secondary" id="demoBtn" type="button">恢复三张示例海报</button>
+      </div>
+    </section>
+    <section class="panel preview-panel">
+      <div class="reader-top"><div><span class="panel-kicker">STEP 02</span><b>实时预览</b></div><span id="previewBadge">完整显示 · 不裁切</span></div>
+      <div class="preview-outer"><div class="preview-sheet" id="sheet" style="aspect-ratio:9/16">
+        <div class="strip" id="strip" aria-label="左右滑动查看图片"></div>
+        <button class="navarrow left" id="prev" aria-label="上一张"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button class="navarrow right" id="next" aria-label="下一张"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div></div>
+      <div class="preview-under"><span class="pager" id="pageNum">01 / 03</span><div class="dots" id="dots"></div><span>← 左右滑动 →</span></div>
+      <div class="hintline"><span>支持鼠标、触控板、触屏与方向键</span><code id="sizeInfo">9 : 16</code></div>
+    </section>
+    <aside class="panel options-panel">
+      <div class="panel-h"><div><span class="panel-kicker">STEP 03</span><h2>样式与分享</h2></div><span class="tiny">实时同步预览</span></div>
+      <div class="options">
+        <div class="control-section-title">画面设置 <span>调整展示效果</span></div>
+        <div class="form-row"><label for="ratio">画面比例</label><select id="ratio"><option value="first">跟随首图</option><option value="9/16">竖版 9:16</option><option value="3/4">竖版 3:4</option><option value="1/1">正方形 1:1</option><option value="4/3">横版 4:3</option><option value="16/9">横版 16:9</option></select></div>
+        <div class="form-row"><label for="fit">图片适配</label><select id="fit"><option value="contain">完整显示（推荐）</option><option value="cover">铺满并裁切</option></select></div>
+        <div class="form-row"><label for="bg">留白背景</label><select id="bg"><option value="#ffffff">纯白</option><option value="#f1f5fa">雾蓝</option><option value="#101c2a">深色</option></select></div>
+        <div class="form-row"><label for="caption">滑动提示</label><select id="caption"><option value="show">显示“左右滑动查看更多”</option><option value="hide">不显示</option></select></div>
+        <div class="section-divider"></div>
+        <div class="control-section-title">导出与分享 <span>选择使用平台</span></div>
+        <div class="export-platform"><span class="platform-icon wc"><svg aria-label="微信" role="img" viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg></span><div><b>微信公众号</b><small>富文本复制 · 手机预览验证</small></div></div>
+        <p class="tip platform-tip">支持复制测试布局；微信可能过滤互动样式或本地图片，请先在草稿预览。</p>
+        <button class="btn" id="copyBtn">复制到公众号 <span class="button-suffix">兼容测试</span></button>
+        <div class="export-platform obs"><span class="platform-icon ob"><svg aria-label="Obsidian" role="img" viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M19.355 18.538a68.967 68.959 0 0 0 1.858-2.954.81.81 0 0 0-.062-.9c-.516-.685-1.504-2.075-2.042-3.362-.553-1.321-.636-3.375-.64-4.377a1.707 1.707 0 0 0-.358-1.05l-3.198-4.064a3.744 3.744 0 0 1-.076.543c-.106.503-.307 1.004-.536 1.5-.134.29-.29.6-.446.914l-.31.626c-.516 1.068-.997 2.227-1.132 3.59-.124 1.26.046 2.73.815 4.481.128.011.257.025.386.044a6.363 6.363 0 0 1 3.326 1.505c.916.79 1.744 1.922 2.415 3.5zM8.199 22.569c.073.012.146.02.22.02.78.024 2.095.092 3.16.29.87.16 2.593.64 4.01 1.055 1.083.316 2.198-.548 2.355-1.664.114-.814.33-1.735.725-2.58l-.01.005c-.67-1.87-1.522-3.078-2.416-3.849a5.295 5.295 0 0 0-2.778-1.257c-1.54-.216-2.952.19-3.84.45.532 2.218.368 4.829-1.425 7.531zM5.533 9.938c-.023.1-.056.197-.098.29L2.82 16.059a1.602 1.602 0 0 0 .313 1.772l4.116 4.24c2.103-3.101 1.796-6.02.836-8.3-.728-1.73-1.832-3.081-2.55-3.831zM9.32 14.01c.615-.183 1.606-.465 2.745-.534-.683-1.725-.848-3.233-.716-4.577.154-1.552.7-2.847 1.235-3.95.113-.235.223-.454.328-.664.149-.297.288-.577.419-.86.217-.47.379-.885.46-1.27.08-.38.08-.72-.014-1.043-.095-.325-.297-.675-.68-1.06a1.6 1.6 0 0 0-1.475.36l-4.95 4.452a1.602 1.602 0 0 0-.513.952l-.427 2.83c.672.59 2.328 2.316 3.335 4.711.09.21.175.43.253.653z"/></svg></span><div><b>Obsidian</b><small>复制 HTML 片段到笔记</small></div></div>
+        <p class="tip platform-tip">图片压缩后直接写入笔记正文；不会自动创建附件文件。</p>
+        <button class="btn obsidian-btn" id="copyObsidian">复制到 Obsidian</button>
+        <div class="obsidian-advice" id="obsidianInfo">当前为内嵌模式：图片数据保存在笔记 .md 文件中，不会进入附件文件夹；图片较多会增大笔记体积。</div>
+        <button class="btn secondary" id="downloadReader">下载离线翻阅网页</button>
+        <div class="status" id="status" data-type="warn">微信与 Obsidian 的粘贴效果可能不同，请以对应客户端预览为准。</div>
+        <details class="advanced" id="adv"><summary>高级设置 · 微信图片链接</summary><p>公众号不能可靠读取本地 <code>data:</code> 图片。可以先把图片上传到公众号，然后将相应微信图片网址按顺序粘贴到这里，一行一个。</p><span class="chip" id="linkBadge">微信图片链接：0 / 3</span><textarea id="linkInput" placeholder="https://mmbiz.qpic.cn/...（第 1 张）\nhttps://mmbiz.qpic.cn/...（第 2 张）\nhttps://mmbiz.qpic.cn/...（第 3 张）"></textarea><button type="button" class="smallbtn" id="applyLinks">按图片顺序绑定链接</button><p>也可以在下方粘贴从公众号编辑区复制的图片（Ctrl+V），本工具会尝试提取链接；如果提取不到，说明剪贴板没有携带微信图片网址。</p><div id="pasteArea" contenteditable="true" role="textbox" aria-label="从公众号粘贴图片以提取链接" style="border:1px dashed #a8c8e3;background:#f7fbff;border-radius:8px;min-height:52px;padding:12px;color:#7c98b0;font-size:11px" data-placeholder="点这里，再 Ctrl+V 粘贴公众号图片">点这里粘贴来自公众号的图片</div><p style="color:#9b7c43">提示：没有微信托管图片链接时，仍能复制测试布局，但粘贴后图片可能消失。</p></details>
+      </div>
+    </aside>
+  </section>
+  <section class="guide"><b>使用说明</b><p>① 添加图片（上传后自动替换示例） → ② 拖动排序 / 选择显示样式 → ③ 复制到目标平台，或下载独立网页。</p><p><b>Obsidian：</b>进入笔记编辑区，按 Ctrl+V 粘贴，然后切换到「阅读模式」，即可在图片区横向滚动。无需安装插件；请勿粘贴到代码块内。图片以内嵌 Base64 保存到笔记的 .md 文件，不会单独生成附件；数量多会让笔记变大。</p><p><b>公众号：</b>富文本复制仍为兼容性测试，微信可能过滤交互样式，必须在微信手机端预览确认。</p></section>
+  <footer class="site-footer" aria-label="项目信息">
+    <span class="footer-wordmark">Gallery Studio · v1.0.0</span>
+    <span>创作者 · <strong>池外 ChiWai</strong></span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <span>© 2026 ChiWai · MIT 开源</span>
+    <span class="footer-note">微信 / Obsidian 的粘贴效果请以客户端实测为准</span>
+  </footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="./app.js"></script>
+</body></html>
