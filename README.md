@@ -1,4 +1,4 @@
-# Gallery Studio · 横滑组图工作室
+# Gallery Studio · 横滑组图
 
 **当前版本：v1.0.0**
 
